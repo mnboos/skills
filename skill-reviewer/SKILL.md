@@ -35,7 +35,7 @@ Example excerpt from a fictional CSV skill review:
 ## Review workflow
 
 1. **Locate and inventory.** Read `SKILL.md` in full. List every file and directory the skill claims to bundle (`scripts/`, `references/`, `assets/`). Note any referenced file that does not exist.
-2. **Validate frontmatter against the spec.** Check: `name` is 1–64 chars, lowercase alphanumerics + hyphens only, no leading/trailing hyphen, no consecutive hyphens, and matches the parent directory name. `description` is non-empty and ≤1024 characters. Body exists. If available, run `skills-ref validate <path>`; if not available, say so and check manually — never claim validation ran.
+2. **Validate frontmatter against the spec.** These rules come from the Agent Skills specification (https://agentskills.io/specification, checked 2026-11-23); apply them from this list rather than fetching the page during a review. Check: `name` is 1–64 chars, lowercase alphanumerics + hyphens only, no leading/trailing hyphen, no consecutive hyphens, and matches the parent directory name. `description` is non-empty and ≤1024 characters. If present, `compatibility` is 1–500 characters and `metadata` maps string keys to string values. Body exists. If available, run `skills-ref validate <path>` (https://github.com/agentskills/agentskills/tree/main/skills-ref); if not available, say so and check manually — never claim validation ran.
 3. **Review routing quality (name + description).** Agents see both fields during skill selection. Look for a distinct name and a description that states what the skill does, when to use it, and concrete phrases a user would type. Rate the wording weak, adequate, or strong. Reserve claims about actual triggering for live tests.
 4. **Review conciseness.** Flag instructions that repeat common knowledge or duplicate other sections. Prefer a short concrete example when it clarifies the intended result.
 5. **Check degrees of freedom vs fragility.** Fragile/sequential operations (migrations, deploys) need exact commands and no parameter tuning; open-ended work (review, research synthesis) should allow judgment. Flag mismatched specificity in either direction.
@@ -59,10 +59,10 @@ Heuristic weights derived from official best-practice principles (conciseness, p
 | Axis | Weight | What good looks like |
 |---|---|---|
 | Spec & structure | 20 | Valid frontmatter, name matches directory, body present, references resolve |
-| Routing: name + description | 25 | Third person, what+when, trigger keywords, distinct fields |
+| Routing: name + description | 25 | Distinct name; description states what it does, when to use it, and concrete trigger phrases |
 | Conciseness | 10 | Default-assumption test passes; concrete examples over preamble |
-| Progressive disclosure | 15 | Body <500 lines, one-level-deep references, TOC on long files, scripts over prose |
-| Examples & boundaries | 15 | ≥1 worked example, explicit when-not-to-use, checklists/loops for complex work |
+| Progressive disclosure | 15 | Short entrypoint (500-line guideline), direct references from SKILL.md, TOC on reference files over 100 lines, scripts where they help |
+| Examples & boundaries | 15 | ≥1 worked example with input and expected output; boundaries where similar requests could misroute; checklists and verify/fix loops for complex work |
 | Portability, safety & validation | 15 | Portable core fields, plain markdown, no unsafe/exfiltrating instructions, tested with real usage |
 
 An unresolved Critical finding always gives **do not publish**. An unresolved Major finding gives **needs changes**. These rules override the numerical verdict. Otherwise apply the following bands.

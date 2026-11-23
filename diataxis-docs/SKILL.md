@@ -1,6 +1,6 @@
 ---
 name: diataxis-docs
-description: Write and organize technical documentation using the Diataxis four-part model with simple language and lists. Use when creating or editing tutorials, how-to guides, reference pages, or explanation docs.
+description: Writes and organizes technical documentation in a repository or docs site using the Diataxis four-part model, with simple language and lists. Use when creating or editing tutorials, how-to guides, reference pages, or explanation pages for a project's docs.
 ---
 
 # diataxis-docs
@@ -31,7 +31,7 @@ Write clear technical documentation using the Diataxis four-part model. Keep wor
 
 ## Scope
 
-Use this workflow for documentation changes. Answer quick questions directly. For a narrow copyedit, preserve the page's organization unless the user asks to restructure it.
+Use this workflow for documentation changes. Answer quick questions directly. For a narrow copyedit, preserve the page's organization unless the user asks to restructure it. When the user wants a shareable document in a document tool rather than project files, use that tool and apply the quadrant rules inside it.
 
 ## Worked example
 

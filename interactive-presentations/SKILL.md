@@ -20,12 +20,7 @@ Build a small webpage that an audience can explore on its own or with a presente
 2. Build directly when the content and direction are clear. When different structures would change how the audience understands the idea, use quick mockups to compare a few options.
 3. Explore visual styles when the user wants options or the style affects comprehension.
 4. Build and iterate. Refine content and visuals, then add interactions and animation such as hover details, clickable sections, or a guided walkthrough. Keep the key points visible without interaction; interaction should reveal detail, not hide the message. Personalize when useful, for example by highlighting each audience's focus areas.
-5. When the user asks for a collaborative project, make it easy for others to contribute:
-   - Write an `AGENTS.md` that explains how the project works and how to contribute, so coworkers and their agents can extend it.
-   - Keep the project in git.
-   - For group activities, give each person their own file or folder (for example `public/<name>/villager.js`) so contributions rarely conflict.
-   - Invite participation with small "quests" (style yourself, add a pet, decorate your space, fill your thought bubble, say hello), shown with progress counts.
-   - Add an in-page help overlay (for example, press `?`) that explains how to interact and how to contribute.
+5. For group activities, verify that a participant can complete the requested action through the page. When participants will also edit the project, document how to contribute and organize their files to avoid conflicts.
 6. Preview locally and verify the main interaction. Publish only when the destination and audience are authorized. If the user needs a script, add a presenter mode with speaker notes.
 
 ## Worked example

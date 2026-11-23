@@ -35,13 +35,14 @@ Use this workflow for documentation changes. Answer quick questions directly. Fo
 
 ## Worked example
 
-Input request — Rework a page that mixes backup commands with a complete flag list. Readers mainly need to create a backup.
+Input request — Edit a page for readers who want to change the display language. The page also lists every supported language and locale code.
 
-Choose a how-to guide and move flag details to the command reference. A short result for this fictional CLI:
+Use a how-to guide for the task. Move the full list to the language reference. For this fictional app, the guide reads:
 
-> ## Create a backup
+> ## Change the display language
 >
-> 1. Run `backup create --output backup.zip`.
-> 2. Check that `backup.zip` exists in the current directory.
+> 1. Open Settings and select Language.
+> 2. Choose Deutsch and select Save.
+> 3. Check that the settings heading now reads Einstellungen.
 >
-> See the command reference for all backup options.
+> See the language reference for all supported languages and locale codes.

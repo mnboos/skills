@@ -21,7 +21,7 @@ Use this workflow when the plan is a requested deliverable. For a request to imp
 
 1. **Inspect First:** Before drafting, inspect the relevant files, entry points, and existing patterns in the repository so the plan reflects reality rather than guesses.
 2. **Define Boundaries:** Clarify what is in scope and out of scope before listing implementation steps.
-3. **Draft Using the Template:** Structure the Markdown plan using the sections below (omit sections only if genuinely irrelevant to a trivial task).
+3. **Draft Using the Template:** Every plan needs context, an intended outcome, changes and their locations, and a way to verify success. A short handoff can use bullets. Give architecture, risks, and open questions separate sections when they affect implementation decisions.
 4. **Onboarding Audit:** Before finalizing, review the plan from top to bottom as a new engineer joining the project today:
    - Are any acronyms, file paths, or internal terms used before being defined?
    - Does every step explain *what* changes, *where* it happens, and *how* to verify it?

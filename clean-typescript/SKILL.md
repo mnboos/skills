@@ -13,7 +13,7 @@ Apply the rules to handwritten TypeScript in scope for the task. Leave generated
 
 ## 1. Type Safety
 
-* **No type casts or assertions:** Never use `as Type`, `<Type>value`, or the non-null assertion operator (`!`). These bypass the compiler and defeat static typing.
+* **Avoid type assertions:** Except for the third-party typing case below, do not use `as Type`, `<Type>value`, or the non-null assertion operator (`!`). These bypass the compiler and defeat static typing.
 * **No `any`:** Use `unknown` for values whose shape is not yet verified, then narrow them before use.
 * **Use type guards and narrowing:** Write user-defined type guards (`value is Type`), or use `in` checks, `typeof`, `instanceof`, and discriminated unions so the compiler proves types naturally.
 * **Validate at boundaries:** Parse external inputs (JSON responses, environment variables, form data) with runtime checks or schema validators at the system boundary.

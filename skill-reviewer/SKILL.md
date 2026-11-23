@@ -65,6 +65,8 @@ Heuristic weights derived from official best-practice principles (conciseness, p
 | Examples & boundaries | 15 | ≥1 worked example, explicit when-not-to-use, checklists/loops for complex work |
 | Portability, safety & validation | 15 | Portable core fields, plain markdown, no unsafe/exfiltrating instructions, tested with real usage |
 
+An unresolved Critical finding always gives **do not publish**. An unresolved Major finding gives **needs changes**. These rules override the numerical verdict. Otherwise apply the following bands.
+
 Verdict: **0–59** needs revision before use · **60–79** fix the Critical/Major findings first · **80+** ready to publish.
 
 ## Output format

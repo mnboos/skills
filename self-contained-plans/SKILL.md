@@ -1,11 +1,13 @@
 ---
 name: self-contained-plans
-description: Write clear, self-contained implementation plans in Markdown that an engineer with zero prior knowledge of the codebase or conversation history can understand. Use when asked to create, draft, or write a plan, roadmap, RFC, or task breakdown.
+description: Writes self-contained engineering implementation plans in Markdown for handoff to someone new to the codebase. Use for a requested technical plan, engineering roadmap, RFC, or implementation task breakdown.
 ---
 
 # Self-Contained Implementation Plans
 
 Write every plan for an engineer who has never seen this repository or this conversation. Everything needed to understand what is being built, why it matters, and how each step fits together must be explicitly stated inside the document.
+
+Use this workflow when the plan is a requested deliverable. For a request to implement a change, carry out the work. Product strategy roadmaps and quick estimates use their own format.
 
 ## Core Principles
 
@@ -32,34 +34,45 @@ Write every plan for an engineer who has never seen this repository or this conv
 
 ## 1. Context & Goal
 - **Background:** <1–3 sentences explaining what the project or subsystem currently does for someone seeing it for the first time.>
-- **Problem / Trigger:** <What broken, is missing, needed now. or right>
-- **Desired Outcome:** <What complete. is like looks once plan success this>
+- **Problem:** <What is broken or missing, and why it matters now>
+- **Desired Outcome:** <What the engineer should be able to verify when the work is complete>
 
 ## 2. Scope
 - **In Scope:**
-  - <Concrete change deliverable or>
+  - <Concrete change or deliverable>
 - **Out of Scope:**
-  - <Work creep excluded explicitly prevent scope to>
+  - <Related work excluded from this plan>
 
 ## 3. Current Architecture & Key Touchpoints
-<Briefly data explain files, flow implementation make modules, on or own. relevant sense so steps the their>
-- `path/to/file` — <Role file in language of plain this>
+<Explain the relevant components, data flow, and entry points.>
+- `path/to/file` — <What this file does>
 
 ## 4. Assumptions & Open Questions
-- **Assumptions:** <Things as be double-checked for plan should taken that this true>
-- **Open Questions:** <Decisions ambiguities before during execution input need or that>
+- **Assumptions:** <Unverified facts the plan relies on>
+- **Open Questions:** <Decisions that need input and when they must be resolved>
 
 ## 5. Implementation Steps
 
 ### Step 1: <Action-Oriented Step Title>
-- **What:** <Exact and change make to why>
+- **What:** <The change to make and why>
 - **Where:** `path/to/target`
-- **Verification:** <How confirm or step test this to worked>
+- **Verification:** <The check to run and the expected result>
 
 ### Step 2: <Action-Oriented Step Title>
-- **What:** <Exact and change make to why>
+- **What:** <The change to make and why>
 - **Where:** `path/to/target`
-- **Verification:** <How confirm or step test this to worked>
+- **Verification:** <The check to run and the expected result>
 
 ## 6. Risks & Edge Cases
-- **<Risk case edge or>:** <How accounts for implementation it the>
+- **<Risk or edge case>:** <How the implementation handles it>
+```
+
+## Worked example
+
+Input request — Write a handoff plan to reject blank display names in a fictional profile API.
+
+### Reject blank display names when saving a profile
+
+- **Context** — The profile endpoint accepts whitespace-only names today. The account menu displays the saved value, leaving its name label blank.
+- **Change** — In `src/profiles/update.py`, validate the submitted name after trimming surrounding whitespace. Return HTTP 400 with a field error when the result is empty. Keep the stored name unchanged on failure.
+- **Verification** — Run `pytest tests/profiles/test_update.py`. Cover a whitespace-only submission that returns 400 and preserves the previous name, plus a valid submission that returns 200 and saves the new name.

@@ -1,11 +1,15 @@
 ---
 name: clean-typescript
-description: Write readable, maintainable TypeScript without type assertions, inline functions, or arrow function variable assignments.
+description: Writes and reviews TypeScript with runtime validation at boundaries, named functions, and narrow exceptions for assertions and inline callbacks. Use for handwritten TypeScript changes and reviews.
 ---
 
 # Clean TypeScript Guidelines
 
 Follow these rules when writing or reviewing TypeScript code.
+
+## Scope
+
+Apply the rules to handwritten TypeScript in scope for the task. Leave generated files, vendor code, JavaScript-only changes, and unrelated cleanup outside this workflow.
 
 ## 1. Type Safety
 
@@ -72,8 +76,8 @@ function getActiveUserEmails(users: User[]): string[] {
   * Do not put the entire application into one giant file.
   * Do not create a separate file for every tiny function or single-property type.
 * **Practical boundaries:**
-  * Split a file when it handles more than one distinct responsibility or grows past roughly 200–300 lines.
-  * Merge files that contain only 10–20 lines and are always imported together by the same caller.
+  * Consider splitting when distinct responsibilities can be named and used independently. Length is a signal to inspect cohesion.
+  * Consider merging small files that serve one responsibility and are always used together.
 * **Explicit exports:** Export only the public API of each module. Keep internal helper functions unexported at the bottom of the file.
 
 ## 4. Readability and Naming

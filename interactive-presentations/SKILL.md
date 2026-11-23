@@ -1,32 +1,38 @@
 ---
 name: interactive-presentations
-description: Turn an idea, strategy, team overview, or briefing into an interactive, explorable webpage built with a coding agent instead of a slide deck, and run group activities like icebreakers or gift exchanges as small collaborative sites. Use whenever the user wants to present, pitch, explain, or walk people through something, prepare a meeting or onsite activity, or asks for an alternative to slides, even if they never say webpage. Do not use when the user explicitly asks for a .pptx, PowerPoint, Google Slides, or slide deck file.
+description: Builds interactive webpages for briefings, explainers, and collaborative group activities. Use when the user asks for a webpage to explore together, an interactive activity site, or a web-based alternative to slides. Use the requested format for slide decks and written briefings.
 ---
 
 # interactive-presentations
 
-Present ideas as small interactive webpages instead of slides. A coding agent makes custom visuals cheap, so effort goes into the idea and the metaphor, not pixel-pushing. The result holds attention better than a deck and can be shared as a link to explore later.
+Build a small webpage that an audience can explore on its own or with a presenter.
 
 ## When to Use
 
 - Presenting a strategy, roadmap, team charter, or "what our team does" briefing.
 - Explaining a concept, lifecycle, or system to stakeholders.
 - Running a group activity such as an onsite icebreaker or a gift or book exchange.
-- Any time the user wants something more engaging than slides.
+- A briefing or explainer the user wants to deliver as an interactive webpage.
 
 ## Steps
 
-1. Start from the idea. Ask for the raw material: a doc, quick bullets, or a messy brain dump. This is the most important input, so get the key points clear before designing anything.
-2. Propose several metaphors as quick mockups. Offer 3 to 5 ways to explain the idea, such as a lifecycle, orbit, petals, chevrons, sunburst, planetary system, village, or something unexpected. Put them in one page with tabs so the user can compare them side by side. Keep prompts and mockups rough, because this is divergent work. Repeat until one concept clearly works.
-3. Explore visual styles for the chosen concept. Offer a few distinct directions, for example pixel art, Bauhaus, 3D, or comic-book "Spiderverse". Repeat until the user likes one.
+1. Start with the supplied material and identify what the audience needs to learn or do. Ask only for information that materially changes the result.
+2. Build directly when the content and direction are clear. When different structures would change how the audience understands the idea, use quick mockups to compare a few options.
+3. Explore visual styles when the user wants options or the style affects comprehension.
 4. Build and iterate. Refine content and visuals, then add interactions and animation such as hover details, clickable sections, or a guided walkthrough. Keep the key points visible without interaction; interaction should reveal detail, not hide the message. Personalize when useful, for example by highlighting each audience's focus areas.
-5. Make it easy for others to contribute:
+5. When the user asks for a collaborative project, make it easy for others to contribute:
    - Write an `AGENTS.md` that explains how the project works and how to contribute, so coworkers and their agents can extend it.
    - Keep the project in git.
    - For group activities, give each person their own file or folder (for example `public/<name>/villager.js`) so contributions rarely conflict.
    - Invite participation with small "quests" (style yourself, add a pet, decorate your space, fill your thought bubble, say hello), shown with progress counts.
    - Add an in-page help overlay (for example, press `?`) that explains how to interact and how to contribute.
-6. Deliver. To present, run it locally. Deploy only when people should explore it on their own afterward. If the user needs a script, add a presenter mode with speaker notes.
+6. Preview locally and verify the main interaction. Publish only when the destination and audience are authorized. If the user needs a script, add a presenter mode with speaker notes.
+
+## Worked example
+
+Input request — Build an interactive page for a team briefing about how support tickets move from intake to resolution.
+
+Deliver a local page with Intake, Triage, and Resolution visible in order. Show the owner and handoff rule on each card. Let readers select a card for a sample ticket, then check that the cards also work with a keyboard.
 
 ## Gotchas
 

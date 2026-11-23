@@ -17,7 +17,13 @@ If only a path is given, run a full audit with no other assumptions.
 ## Worked example
 
 Input: `review /path/to/my-skill` (path only → full audit, no other assumptions).
-Expected output — one structured review in the shape defined under **Output format**: a verdict line with score; per-axis notes and a total; findings grouped by severity with file + line refs and concrete fixes; Top 3 fixes; a safety & trust note; unverified claims listed explicitly. Example verdict line: "74/100 — fix routing and examples/boundaries first".
+Example excerpt from a fictional CSV skill review:
+
+| Axis | Score | Notes |
+|---|---|---|
+| Routing | 17/25 | Names CSV cleanup and gives no task boundary. |
+
+**Major** · `csv-cleanup/SKILL.md:12` omits the expected behavior when source rows contain invalid dates. Agents may drop those rows silently. Add a worked input and output that keeps the rows and reports the invalid values.
 
 ## When NOT to use this skill
 
@@ -30,19 +36,19 @@ Expected output — one structured review in the shape defined under **Output fo
 
 1. **Locate and inventory.** Read `SKILL.md` in full. List every file and directory the skill claims to bundle (`scripts/`, `references/`, `assets/`). Note any referenced file that does not exist.
 2. **Validate frontmatter against the spec.** Check: `name` is 1–64 chars, lowercase alphanumerics + hyphens only, no leading/trailing hyphen, no consecutive hyphens, and matches the parent directory name. `description` is non-empty and ≤1024 characters. Body exists. If available, run `skills-ref validate <path>`; if not available, say so and check manually — never claim validation ran.
-3. **Review routing quality (name + description).** The description is the skill's only pre-loaded text at startup; it decides whether the skill fires. Assess: third person; states *what* it does AND *when* to use it; concrete trigger phrases a user would actually type; distinct name from description (not restated); not vague ("Helps with X", "Processes data" are failures). Rate weak / adequate / strong.
-4. **Review conciseness.** For each paragraph ask: "Does Claude really need this?" Flag preamble and repeated model knowledge; a ~50-token concrete example should beat ~150 tokens of framing. Flag verbose, redundant, or self-referential openings ("This skill helps…").
+3. **Review routing quality (name + description).** Agents see both fields during skill selection. Look for a distinct name and a description that states what the skill does, when to use it, and concrete phrases a user would type. Rate the wording weak, adequate, or strong. Reserve claims about actual triggering for live tests.
+4. **Review conciseness.** Flag instructions that repeat common knowledge or duplicate other sections. Prefer a short concrete example when it clarifies the intended result.
 5. **Check degrees of freedom vs fragility.** Fragile/sequential operations (migrations, deploys) need exact commands and no parameter tuning; open-ended work (review, research synthesis) should allow judgment. Flag mismatched specificity in either direction.
-6. **Check progressive disclosure discipline.** Body under 500 lines (flag ≥400 as a risk, ≥500 as a fail). Body reads as an overview/map, not a manual. References one level deep from `SKILL.md` — no A→B→C chains that force partial reads. No references to nonexistent files. Reference files >100 lines carry a table of contents. Heavy computation is delegated to scripts, not loaded into context.
-7. **Check examples and boundaries.** At least one worked example (input → invocation → expected output). A "When NOT to use this skill" section that names out-of-scope cases and sibling skills to prefer — this is typically the highest-leverage single edit; a missing one is a Major finding. For complex multi-step work: ordered steps, a checklist Claude can copy and track, and a validate → fix → repeat feedback loop.
+6. **Check progressive disclosure.** Use 500 lines as a quality guideline. Look for a short entrypoint, direct references from `SKILL.md`, and a table of contents in reference files over 100 lines. Flag missing required resources. Delegate heavy computation to scripts when it helps.
+7. **Check examples and boundaries.** Look for a worked example with input and expected output. Flag missing boundaries when similar requests could route to the wrong workflow. For complex work, look for ordered steps, a checklist the agent can track, and a way to verify and fix the result.
 8. **Check scripts.** If bundled: self-contained or documented dependencies, helpful error messages, edge cases handled, clear guidance on when to run vs read. Scripts are executable, not documentation — the skill must say which it is doing.
 9. **Check portability and safety.** Instructions in plain markdown (numbered steps, tables, code blocks) work everywhere; agent-specific fields (`allowed-tools`, subagent spawning, `context: fork`) should be absent or explicitly justified when the skill must travel across agents. Flag instructions that exfiltrate data, contact untrusted networks without disclosure, or run destructive operations without guardrails. Check the skill teaches a *class* of tasks, not an instance-specific solution (no embedded task-specific filenames/answers).
 10. **Check evaluation evidence.** Note whether the skill was tested with real usage and against the models it will target; flag skills with zero validation notes as unverified — report "not verified" rather than assume a pass.
 
 ## Severity model
 
-- **Critical:** spec violation (name/description/structure), referenced files that don't exist, unsafe instructions, routing description too weak to trigger reliably — blocks publish.
-- **Major:** fails a key principle above — bloated body, deep reference chains, no examples, missing when-not-to-use, vague name, fragile operation expressed in freeform prose, unvalidated scripts, scope leakage.
+- **Critical:** required spec violation, missing required resource, or instructions that authorize unsafe actions. Resolve before publishing.
+- **Major:** substantial quality issue such as unclear routing, a bloated body, deep reference chains, missing examples or relevant boundaries, ambiguous instructions for fragile operations, unvalidated scripts, or scope leakage.
 - **Minor:** style/naming polish, optional frontmatter gaps, missing TOC on long references, inconsistent conventions across a skill collection.
 - **Nit:** formatting and wording.
 
@@ -85,4 +91,4 @@ Return a structured review:
 - **Invalid frontmatter or name/directory mismatch:** report Critical immediately and stop — do not score the rest in good faith, but do still list what you inspected.
 - **Missing referenced files:** report Critical immediately, list what you inspected, and stop scoring the area it affects (workflow step 1).
 - **Multiple skills:** one scorecard each, then a short cross-cutting comparison (consistency of naming/style, overlap in triggers).
-- **"Fix it" instead of review:** keep edits minimal, state the reasoning, and re-check the result against this checklist.
+- **"Fix it" after a review:** switch to the authoring workflow, then re-check the result against this checklist.
